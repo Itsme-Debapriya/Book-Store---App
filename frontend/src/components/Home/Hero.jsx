@@ -9,7 +9,7 @@ const Hero = () => {
           Discover Your Next Great Read
         </h1>
         <p className="mt-4 text-xl text-zinc-300 text-center lg:text-left">
-          Uncover captivating stories, enriching krxxledge, and endless
+          Uncover captivating stories, enriching knowledge, and endless
           inspiration in our curated collection of books
         </p>
         <div className="mt-8">
