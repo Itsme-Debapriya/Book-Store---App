@@ -37,12 +37,11 @@ const Navbar = () => {
         <div className="nav-links-TaleHut block md:flex items-center gap-4 ">
           <div className="hidden md:flex gap-4">
             {links.map((items, i) => (
-              <div className="flex items-center">
+              <div key={i} className="flex items-center">
                 {items.title === "Profile" ? (
                   <Link
                     to={items.link}
                     className="px-4 py-1 border border-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"
-                    key={i}
                   >
                     {items.title}
                   </Link>
@@ -50,7 +49,6 @@ const Navbar = () => {
                   <Link
                     to={items.link}
                     className="hover:text-blue-500 transition-all duration-300"
-                    key={i}
                   >
                     {items.title}{" "}
                   </Link>

@@ -11,7 +11,6 @@ const ViewBookDetails = () => {
   const [Data, setData] = useState();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const role = useSelector((state) => state.auth.role);
-  console.log(isLoggedIn, role);
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
@@ -33,14 +32,16 @@ const ViewBookDetails = () => {
                 alt="/"
                 className="h-[50vh] lg:h-[70vh] rounded"
               />
-              <div className="flex md:flex-col">
-                <button className="bg-white rounded-full text-3xl p-2 text-red-500">
-                  <FaHeart />
-                </button>
-                <button className="bg-white rounded-full text-3xl p-2 mt-4 text-blue-500">
-                  <FaShoppingCart />
-                </button>
-              </div>
+              {isLoggedIn === true && role === "user" && (
+                <div className="flex md:flex-col">
+                  <button className="bg-white rounded-full text-3xl p-2 text-red-500">
+                    <FaHeart />
+                  </button>
+                  <button className="bg-white rounded-full text-3xl p-2 mt-4 text-blue-500">
+                    <FaShoppingCart />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           <div className="p-4 w-full lg:w-3/6">
