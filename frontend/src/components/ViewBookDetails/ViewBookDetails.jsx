@@ -5,6 +5,8 @@ import Loader from "../Loader/Loader";
 import { GrLanguage } from "react-icons/gr";
 import { FaHeart } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
+import { MdOutlineDelete } from "react-icons/md";
 import { useSelector } from "react-redux";
 const ViewBookDetails = () => {
   const { id } = useParams();
@@ -20,25 +22,55 @@ const ViewBookDetails = () => {
     };
     fetch();
   }, []);
+  const headers = {
+    id: localStorage.getItem("id"),
+    authorization: `Bearer ${localStorage.getItem("token")}`,
+    bookid: id,
+  };
+  const handleFavourite = async () => {
+    const response = await axios.put(
+      "http://localhost:1000/api/v1/add-book-to-favourite",
+      {},
+      { headers }
+    );
+    console.log(response);
+  };
   return (
     <>
       {Data && (
-        <div className="px-4 lg:px-12 py-8 bg-zinc-900 flex flex-col md:flex-row gap-8">
+        <div className="px-4 lg:px-12 py-8 bg-zinc-900 flex flex-col lg:flex-row gap-8 items-start">
           <div className="w-full lg:w-3/6  ">
             {" "}
-            <div className="flex justify-around bg-zinc-800 p-12 rounded">
+            <div className="flex flex-col lg:flex-row justify-around bg-zinc-800 p-12 rounded">
               <img
                 src={Data.url}
                 alt="/"
-                className="h-[50vh] lg:h-[70vh] rounded"
+                className="h-[50vh] md:h-[60vh] lg:h-[70vh] rounded"
               />
               {isLoggedIn === true && role === "user" && (
-                <div className="flex md:flex-col">
-                  <button className="bg-white rounded-full text-3xl p-2 text-red-500">
-                    <FaHeart />
+                <div className="flex flex-col md:flex-row lg:flex-col items-center justify-between lg:justify-start mt-4 lg:mt-0">
+                  <button
+                    className="bg-white rounded lg:rounded-full text-3xl p-3 text-red-500 flex items-center justify-center"
+                    onClick={handleFavourite}
+                  >
+                    <FaHeart />{" "}
+                    <span className="ms-4 block lg:hidden">Favourites</span>
                   </button>
-                  <button className="bg-white rounded-full text-3xl p-2 mt-4 text-blue-500">
-                    <FaShoppingCart />
+                  <button className="text-white rounded mt-8 md:mt-0 lg:rounded-full text-3xl p-3 lg:mt-8 bg-blue-500 flex items-center justify-center">
+                    <FaShoppingCart />{" "}
+                    <span className="ms-4 block lg:hidden">Add to cart</span>
+                  </button>
+                </div>
+              )}
+              {isLoggedIn === true && role === "admin" && (
+                <div className="flex flex-col md:flex-row lg:flex-col items-center justify-between lg:justify-start mt-4 lg:mt-0">
+                  <button className="bg-white rounded lg:rounded-full text-3xl p-3 flex items-center justify-center">
+                    <FaEdit />{" "}
+                    <span className="ms-4 block lg:hidden">Edit</span>
+                  </button>
+                  <button className="text-red-500 rounded lg:rounded-full text-3xl p-3 mt-8 md:mt-0 lg:mt-8 bg-white flex items-center justify-center">
+                    <MdOutlineDelete />{" "}
+                    <span className="ms-4 block lg:hidden">Delete Book</span>
                   </button>
                 </div>
               )}
