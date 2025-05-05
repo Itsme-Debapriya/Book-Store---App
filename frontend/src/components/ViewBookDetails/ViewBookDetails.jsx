@@ -33,7 +33,15 @@ const ViewBookDetails = () => {
       {},
       { headers }
     );
-    console.log(response);
+    alert(response.data.message);
+  };
+  const handleCart = async () => {
+    const response = await axios.put(
+      "http://localhost:1000/api/v1/add-to-cart",
+      {},
+      { headers }
+    );
+    alert(response.data.message);
   };
   return (
     <>
@@ -56,7 +64,10 @@ const ViewBookDetails = () => {
                     <FaHeart />{" "}
                     <span className="ms-4 block lg:hidden">Favourites</span>
                   </button>
-                  <button className="text-white rounded mt-8 md:mt-0 lg:rounded-full text-3xl p-3 lg:mt-8 bg-blue-500 flex items-center justify-center">
+                  <button
+                    className="text-white rounded mt-8 md:mt-0 lg:rounded-full text-3xl p-3 lg:mt-8 bg-blue-500 flex items-center justify-center"onClick={handleCart}
+                    
+                  >
                     <FaShoppingCart />{" "}
                     <span className="ms-4 block lg:hidden">Add to cart</span>
                   </button>
