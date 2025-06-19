@@ -15,11 +15,11 @@ router.post("/place-order", authenticateToken, async (req, res) => {
 			const newOrder = new Order({ user: id, book: orderData._id });
 			const orderDataFromDb = await newOrder.save();
 			//saving Order in new model
-			await User.findByIdandUpdate(id, {
+			await User.findByIdAndUpdate(id, {
 				$push: { orders: orderDataFromDb._id },
 			});
 			//clearing cart
-			await User.findByIdandUpdate(id, {
+			await User.findByIdAndUpdate(id, {
 				$pull: { cart: orderData._id },
 			});
 		}
@@ -78,7 +78,7 @@ router.get("/get-all-orders", authenticateToken, async (req, res) => {
 router.put("/get-all-orders", authenticateToken, async (req, res) => {
 	try {
 		const { id } = req.params;
-		await Order.findByIdandUpdate(id, {
+		await Order.findByIdAndUpdate(id, {
 			status: req.boby.status,
 		});
 		return res.json({

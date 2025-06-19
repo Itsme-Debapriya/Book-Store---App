@@ -19,7 +19,7 @@ const AllBooks = () => {
       {" "}
       <h4 className="text-3xl text-yellow-100">All books</h4>
       {!Data && (
-        <div className="flex items-center justify-center my-8">
+        <div className="w-full h-screen flex items-center justify-center">
           <Loader />{" "}
         </div>
       )}
