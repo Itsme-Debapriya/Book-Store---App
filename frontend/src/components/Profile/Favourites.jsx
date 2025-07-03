@@ -26,7 +26,7 @@ const Favourites = () => {
           <img src="./star.svg" alt="star" className="h-[20vh] my-8" />
         </div>
       )}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid sm:grid-cols-3 gap-4">
         {FavouriteBooks &&
           FavouriteBooks.map((items, i) => (
             <div key={i}>
