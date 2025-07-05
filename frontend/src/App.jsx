@@ -14,6 +14,8 @@ import { authActions } from "./store/auth";
 import Favourites from "./components/Profile/Favourites";
 import UserOrderHistory from "./components/Profile/UserOrderHistory";
 import Settings from "./components/Profile/Settings";
+import AllOrders from "./pages/AllOrders";
+import AddBook from "./pages/AddBook";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,7 +39,14 @@ const App = () => {
         <Route exact path="/LogIn" element={<LogIn />} />
         <Route exact path="/Cart" element={<Cart />} />
         <Route exact path="/Profile" element={<Profile />}>
-          <Route index element={<Favourites />} />
+          {role === "user" ? (
+            <Route index element={<Favourites />} />
+          ) : (
+            <Route index element={<AllOrders />} />
+          )}
+          {role === "admin" && (
+            <Route path="add-book" element={<AddBook />} />
+          )}
           <Route path="orderHistory" element={<UserOrderHistory />} />
           <Route path="settings" element={<Settings />} />
         </Route>

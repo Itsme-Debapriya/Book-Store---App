@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { GrLanguage } from "react-icons/gr";
 import { FaHeart } from "react-icons/fa";
@@ -10,6 +10,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import { useSelector } from "react-redux";
 const ViewBookDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [Data, setData] = useState();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const role = useSelector((state) => state.auth.role);
@@ -43,6 +44,14 @@ const ViewBookDetails = () => {
     );
     alert(response.data.message);
   };
+  const deleteBook = async () => {
+    const response = await axios.delete(
+      "http://localhost:1000/api/v1/delete-book",
+      { headers }
+    );
+    alert(response.data.message);
+    navigate("/all-books");
+  };
   return (
     <>
       {Data && (
@@ -65,8 +74,8 @@ const ViewBookDetails = () => {
                     <span className="ms-4 block lg:hidden">Favourites</span>
                   </button>
                   <button
-                    className="text-white rounded mt-8 md:mt-0 lg:rounded-full text-3xl p-3 lg:mt-8 bg-blue-500 flex items-center justify-center"onClick={handleCart}
-                    
+                    className="text-white rounded mt-8 md:mt-0 lg:rounded-full text-3xl p-3 lg:mt-8 bg-blue-500 flex items-center justify-center"
+                    onClick={handleCart}
                   >
                     <FaShoppingCart />{" "}
                     <span className="ms-4 block lg:hidden">Add to cart</span>
@@ -79,7 +88,10 @@ const ViewBookDetails = () => {
                     <FaEdit />{" "}
                     <span className="ms-4 block lg:hidden">Edit</span>
                   </button>
-                  <button className="text-red-500 rounded lg:rounded-full text-3xl p-3 mt-8 md:mt-0 lg:mt-8 bg-white flex items-center justify-center">
+                  <button
+                    className="text-red-500 rounded lg:rounded-full text-3xl p-3 mt-8 md:mt-0 lg:mt-8 bg-white flex items-center justify-center"
+                    onClick={deleteBook}
+                  >
                     <MdOutlineDelete />{" "}
                     <span className="ms-4 block lg:hidden">Delete Book</span>
                   </button>
