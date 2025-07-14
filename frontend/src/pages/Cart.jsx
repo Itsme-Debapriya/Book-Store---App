@@ -14,7 +14,7 @@ const Cart = () => {
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get(
-        "http://localhost:1000/api/v1/get-user-cart",
+        "https://book-store-app-ps7c.onrender.com/api/v1/get-user-cart",
         { headers }
       );
       setCart(res.data.data);
@@ -23,7 +23,7 @@ const Cart = () => {
   }, [Cart]);
   const deleteItem = async (bookid) => {
     const response = await axios.put(
-      `http://localhost:1000/api/v1/remove-from-cart/${bookid}`,
+      `https://book-store-app-ps7c.onrender.com/api/v1/remove-from-cart/${bookid}`,
       {},
       { headers }
     );
@@ -42,7 +42,7 @@ const Cart = () => {
   const PlaceOrder = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:1000/api/v1/place-order`,
+        `https://book-store-app-ps7c.onrender.com/api/v1/place-order`,
         { order: Cart },
         { headers }
       );
