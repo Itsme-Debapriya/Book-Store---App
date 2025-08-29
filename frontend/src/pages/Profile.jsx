@@ -3,7 +3,7 @@ import Sidebar from "../components/Profile/Sidebar";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import Loader from "../components/Loader/Loader";
+// import Loader from "../components/Loader/Loader";
 import MobileNav from "../components/Profile/MobileNav";
 import adminImage from "../assets/admin.png" // Adjust the path as necessary
 
@@ -66,11 +66,11 @@ const Profile = () => {
       )}
 
       {/* Optional: loader while checking Profile */}
-      {Profile === null && (
+      {/* {Profile === null && (
         <div className="w-full h-full flex items-center justify-center">
           <Loader />
         </div>
-      )}
+      )} */}
     </div>
   );
 
